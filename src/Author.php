@@ -12,6 +12,8 @@
             $this->id = $id;
         }
 
+        // Getters and setters
+
         function getFirstName()
         {
             return $this->first_name;
@@ -37,6 +39,8 @@
             return $this->id;
         }
 
+        // Save and update
+
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO authors (first_name, last_name) VALUES ('{$this->getFirstName()}', '{$this->getLastName()}');");
@@ -55,6 +59,8 @@
                 $this->setLastName($new_last_name);
             }
         }
+
+        // Get and delete
 
         static function getAll()
         {
@@ -96,5 +102,8 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()};");
         }
+
+        // Authors<->Books
+
     }
 ?>
