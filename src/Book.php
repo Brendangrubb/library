@@ -97,5 +97,24 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM books WHERE id = {$this->getId()};");
         }
+
+        function update($new_title, $new_author, $new_genre)
+        {
+            if ($new_title) {
+                $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}' WHERE id = {$this->getId()};");
+                $this->title = $new_title;
+            }
+
+            if ($new_author) {
+                $GLOBALS['DB']->exec("UPDATE books SET author = '{$new_author}' WHERE id = {$this->getId()};");
+                $this->author = $new_author;
+            }
+
+            if ($new_genre) {
+                $GLOBALS['DB']->exec("UPDATE books SET genre = '{$new_genre}' WHERE id = {$this->getId()};");
+                $this->genre = $new_genre;
+            }
+
+        }
     }
 ?>

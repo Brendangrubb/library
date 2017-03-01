@@ -24,8 +24,7 @@
             $title = "The Giving Tree";
             $author = "Shel Silverstein";
             $genre = "childrens";
-            $id = null;
-            $book = new Book($title, $author, $genre, $id);
+            $book = new Book($title, $author, $genre);
 
             // Act
             $result = $book->getTitle();
@@ -41,8 +40,7 @@
             $new_title = "The Missing Piece";
             $author = "Shel Silverstein";
             $genre = "childrens";
-            $id = null;
-            $book = new Book($title, $author, $genre, $id);
+            $book = new Book($title, $author, $genre);
 
             // Act
             $book->setTitle($new_title);
@@ -58,8 +56,7 @@
             $title = "The Giving Tree";
             $author = "Shel Silverstein";
             $genre = "childrens";
-            $id = null;
-            $book = new Book($title, $author, $genre, $id);
+            $book = new Book($title, $author, $genre);
 
             // Act
             $result = $book->getAuthor();
@@ -74,8 +71,7 @@
             $title = "The Giving Tree";
             $author = "Shel Silverstein";
             $genre = "childrens";
-            $id = null;
-            $book = new Book($title, $author, $genre, $id);
+            $book = new Book($title, $author, $genre);
 
             // Act
             $new_author = 'Shelly Silverstein';
@@ -92,8 +88,7 @@
             $title = "The Giving Tree";
             $author = "Shel Silverstein";
             $genre = "childrens";
-            $id = null;
-            $book = new Book($title, $author, $genre, $id);
+            $book = new Book($title, $author, $genre);
             $book->save();
 
             // Act
@@ -109,15 +104,13 @@
             $title = "The Giving Tree";
             $author = "Shel Silverstein";
             $genre = "childrens";
-            $id = null;
-            $book = new Book($title, $author, $genre, $id);
+            $book = new Book($title, $author, $genre);
             $book->save();
 
             $title2 = "The Taking Boy";
             $author2 = "Sandy Goldenstein";
             $genre2 = "adult";
-            $id2 = null;
-            $book2 = new Book($title2, $author2, $genre2, $id2);
+            $book2 = new Book($title2, $author2, $genre2);
             $book2->save();
 
             // Act
@@ -134,15 +127,13 @@
             $title = "The Giving Tree";
             $author = "Shel Silverstein";
             $genre = "childrens";
-            $id = null;
-            $book = new Book($title, $author, $genre, $id);
+            $book = new Book($title, $author, $genre);
             $book->save();
 
             $title2 = "The Taking Boy";
             $author2 = "Sandy Goldenstein";
             $genre2 = "adult";
-            $id2 = null;
-            $book2 = new Book($title2, $author2, $genre2, $id2);
+            $book2 = new Book($title2, $author2, $genre2);
             $book2->save();
 
             // Act
@@ -159,15 +150,13 @@
             $title = "The Giving Tree";
             $author = "Shel Silverstein";
             $genre = "childrens";
-            $id = null;
-            $book = new Book($title, $author, $genre, $id);
+            $book = new Book($title, $author, $genre);
             $book->save();
 
             $title2 = "The Taking Boy";
             $author2 = "Sandy Goldenstein";
             $genre2 = "adult";
-            $id2 = null;
-            $book2 = new Book($title2, $author2, $genre2, $id2);
+            $book2 = new Book($title2, $author2, $genre2);
             $book2->save();
 
             // Act
@@ -184,15 +173,13 @@
             $title = "The Giving Tree";
             $author = "Shel Silverstein";
             $genre = "childrens";
-            $id = null;
-            $book = new Book($title, $author, $genre, $id);
+            $book = new Book($title, $author, $genre);
             $book->save();
 
             $title2 = "The Taking Boy";
             $author2 = "Sandy Goldenstein";
             $genre2 = "adult";
-            $id2 = null;
-            $book2 = new Book($title2, $author2, $genre2, $id2);
+            $book2 = new Book($title2, $author2, $genre2);
             $book2->save();
 
             // Act
@@ -203,5 +190,88 @@
             $this->assertEquals([$book2], $result);
         }
 
+        function test_update_title()
+        {
+            // Arrange
+            $title = "The Giving Tree";
+            $author = "Shel Silverstein";
+            $genre = "childrens";
+            $book = new Book($title, $author, $genre);
+            $book->save();
+
+            // Act
+            $new_title = "The Taking Bush";
+            $new_author = $author;
+            $new_genre = $genre;
+            $book->update($new_title, $new_author, $new_genre);
+            $result = $book->getTitle();
+
+            // Assert
+            $this->assertEquals($new_title, $result);
+        }
+
+        function test_update_author()
+        {
+            // Arrange
+            $title = "The Giving Tree";
+            $author = "Shel Silverstein";
+            $genre = "childrens";
+            $book = new Book($title, $author, $genre);
+            $book->save();
+
+            // Act
+            $new_title = $title;
+            $new_author = "Billy Bush";
+            $new_genre = $genre;
+            $book->update($new_title, $new_author, $new_genre);
+            $result = $book->getAuthor();
+
+            // Assert
+            $this->assertEquals($new_author, $result);
+        }
+
+        function test_update_genre()
+        {
+            // Arrange
+            $title = "The Giving Tree";
+            $author = "Shel Silverstein";
+            $genre = "childrens";
+            $book = new Book($title, $author, $genre);
+            $book->save();
+
+            // Act
+            $new_title = $title;
+            $new_author = $author;
+            $new_genre = "adult";
+            $book->update($new_title, $new_author, $new_genre);
+            $result = $book->getGenre();
+
+            // Assert
+            $this->assertEquals($new_genre, $result);
+        }
+
+        function test_update_all()
+        {
+            // Arrange
+            $title = "The Giving Tree";
+            $author = "Shel Silverstein";
+            $genre = "childrens";
+            $book = new Book($title, $author, $genre);
+            $book->save();
+
+            // Act
+            $new_title = "Crazy Tree Time";
+            $new_author = "Augustus St Claire";
+            $new_genre = "adult";
+            $book->update($new_title, $new_author, $new_genre);
+            $result1 = $book->getTitle();
+            $result2 = $book->getAuthor();
+            $result3 = $book->getGenre();
+
+            // Assert
+            $this->assertEquals($new_title, $result1);
+            $this->assertEquals($new_author, $result2);
+            $this->assertEquals($new_genre, $result3);
+        }
     }
 ?>
