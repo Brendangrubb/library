@@ -102,5 +102,58 @@
             // Assert
             $this->assertEquals($book, $result[0]);
         }
+
+        function test_deleteAll()
+        {
+            // Arrange
+            $title = "The Giving Tree";
+            $author = "Shel Silverstein";
+            $genre = "childrens";
+            $id = null;
+            $book = new Book($title, $author, $genre, $id);
+            $book->save();
+
+            $title2 = "The Taking Boy";
+            $author2 = "Sandy Goldenstein";
+            $genre2 = "adult";
+            $id2 = null;
+            $book2 = new Book($title2, $author2, $genre2, $id2);
+            $book2->save();
+
+            // Act
+            Book::deleteAll();
+            $result = Book::getAll();
+
+            // Assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_getAll()
+        {
+            // Arrange
+            $title = "The Giving Tree";
+            $author = "Shel Silverstein";
+            $genre = "childrens";
+            $id = null;
+            $book = new Book($title, $author, $genre, $id);
+            $book->save();
+
+            $title2 = "The Taking Boy";
+            $author2 = "Sandy Goldenstein";
+            $genre2 = "adult";
+            $id2 = null;
+            $book2 = new Book($title2, $author2, $genre2, $id2);
+            $book2->save();
+
+            // Act
+            $result = Book::getAll();
+
+
+            // Assert
+            $this->assertEquals([$book, $book2], $result);
+        }
+
+
+
     }
 ?>
