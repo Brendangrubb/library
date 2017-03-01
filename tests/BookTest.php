@@ -178,6 +178,30 @@
             $this->assertEquals($book, $result);
         }
 
+        function test_delete()
+        {
+            // Arrange
+            $title = "The Giving Tree";
+            $author = "Shel Silverstein";
+            $genre = "childrens";
+            $id = null;
+            $book = new Book($title, $author, $genre, $id);
+            $book->save();
+
+            $title2 = "The Taking Boy";
+            $author2 = "Sandy Goldenstein";
+            $genre2 = "adult";
+            $id2 = null;
+            $book2 = new Book($title2, $author2, $genre2, $id2);
+            $book2->save();
+
+            // Act
+            $book->delete();
+            $result = Book::getAll();
+
+            // Assert
+            $this->assertEquals([$book2], $result);
+        }
 
     }
 ?>
