@@ -13,6 +13,11 @@
 
     class BookTest extends PHPUnit_Framework_TestCase
     {
+        function tearDown()
+        {
+            Book::deleteAll();
+        }
+
         function test_getTitle()
         {
             // Arrange
@@ -81,6 +86,21 @@
             $this->assertEquals($new_author, $result);
         }
 
+        function test_save()
+        {
+            // Arrange
+            $title = "The Giving Tree";
+            $author = "Shel Silverstein";
+            $genre = "childrens";
+            $id = null;
+            $book = new Book($title, $author, $genre, $id);
+            $book->save();
 
+            // Act
+            $result = Book::getAll();
+
+            // Assert
+            $this->assertEquals($book, $result[0]);
+        }
     }
 ?>
