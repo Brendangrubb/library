@@ -17,6 +17,7 @@
         function tearDown()
         {
             Book::deleteAll();
+            Author::deleteAll();
         }
 
         function test_getTitle()
@@ -201,6 +202,62 @@
             // Assert
             $this->assertEquals($new_title, $result1);
             $this->assertEquals($new_genre, $result2);
+        }
+
+        function test_addAuthor()
+        {
+            // Arrange
+            $title = "The Giving Tree";
+            $genre = "childrens";
+            $book = new Book($title, $genre);
+            $book->save();
+
+            $first_name = "Shel";
+            $last_name = "Silverstein";
+            $author = new Author($first_name, $last_name);
+            $author->save();
+
+            // Act
+            $book->addAuthor($author);
+            $result = $book->getAuthors();
+
+            // Assert
+            $this->assertEquals([$author], $result);
+
+        }
+
+        function test_getAuthors()
+        {
+            // Arrange
+            $title = "Crime and Punishment";
+            $genre = "russian classics";
+            $book = new Book($title, $genre);
+            $book->save();
+
+            $first_name = "Fyodor";
+            $last_name = "Dostoyefsky";
+            $author = new Author($first_name, $last_name);
+            $author->save();
+
+            $first_name2 = "Richard";
+            $last_name2 = "Pevear";
+            $author2 = new Author($first_name2, $last_name2);
+            $author2->save();
+
+            $first_name3 = "Larissa";
+            $last_name3 = "Volokhonsky";
+            $author3 = new Author($first_name3, $last_name3);
+            $author3->save();
+
+            // Act
+            $book->addAuthor($author);
+            $book->addAuthor($author2);
+            $book->addAuthor($author3);
+
+            $result = $book->getAuthors();
+
+            // Assert
+            $this->assertEquals([$author, $author2, $author3], $result);
         }
     }
 ?>
