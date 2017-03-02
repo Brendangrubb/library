@@ -2,11 +2,25 @@
 <html>
     <head>
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/styles.css" rel="stylesheet" type="text/css">
         <title>Library</title>
     </head>
     <body>
         <div class="container">
             <h1 class="jumbotron">Welcome to the Library!</h1>
+            <div class="row">
+                <div class="col-sm-12">
+                    <form action="/search" method="get">
+                        <label for="search">Search:</label>
+                        <input type="text" name="search" class="form-control" placeholder="search library"><br>
+
+                        <div id="search_button">
+                            <button type="submit" class="btn btn-xs">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-sm-4">
                     <form method="post" action="/">
@@ -33,12 +47,9 @@
                             <input type="text" name="last_name" class="form-control" required>
                         </div>
 
-                        <button type="sumbit" class="btn">Add Book</button><br><br>
-                    </form>
-
-                    <form action='/' method='post'>
-                        <input name="_method" type="hidden" value="delete">
-                        <button type="submit" class="btn">Delete All</button>
+                        <div id="add_book">
+                            <button type="sumbit" class="btn btn-xs">Add Book</button><br><br>
+                        </div>
                     </form>
                 </div>
 
@@ -54,6 +65,13 @@
                                     </ul>
                             </ul>
                         {% endfor %}
+
+                        <div id="delete_books">
+                            <form action="/delete_books" method="post" class="form-group">
+                                <input name="_method" type="hidden" value="delete">
+                                <button type="submit" class="btn btn-warning btn-xs">DELETE BOOKS</button>
+                            </form>
+                        </div>
                     {% endif %}
                 </div>
 
@@ -66,7 +84,23 @@
                                 <li>Name: {{ author.getFirstName }} {{ author.getLastName }}</li>
                             </ul>
                         {% endfor %}
+
+                        <div id="delete_authors">
+                            <form action="/delete_authors" method="post" class="form-group">
+                                <input name="_method" type="hidden" value="delete">
+                                <button type="submit" class="btn btn-warning btn-xs">DELETE AUTHORS</button>
+                            </form>
+                        </div>
                     {% endif %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <form action='/' method='post' id='delete_all'>
+                        <input name="_method" type="hidden" value="delete">
+                        <button type="submit" class="btn btn-danger btn-xs">Delete All!</button>
+                    </form>
                 </div>
             </div>
         </div>

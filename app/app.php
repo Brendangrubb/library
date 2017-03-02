@@ -37,8 +37,21 @@
         return $app->redirect('/');
     });
 
-    $app->delete('/', function() use ($app) {
+    $app->delete('/', function() use ($app) { // Deletes all information
         Book::deleteAll();
+        Author::deleteAll();
+        $GLOBALS['DB']->exec("DELETE FROM authors_books;");
+
+        return $app->redirect('/');
+    });
+
+    $app->delete('/delete_books', function() use ($app) { // Deletes all books
+        Book::deleteAll();
+
+        return $app->redirect('/');
+    });
+
+    $app->delete('/delete_authors', function() use ($app) { // Deletes all authors
         Author::deleteAll();
 
         return $app->redirect('/');

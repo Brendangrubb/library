@@ -1,0 +1,11 @@
+#delete_all
+, #delete_books
+, #delete_authors
+, #add_book {
+    text-align: center;
+}
+
+#search_button {
+    padding-bottom: 40px;
+    text-align: center;
+}
