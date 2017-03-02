@@ -8,7 +8,7 @@
         <div class="container">
             <h1 class="jumbotron">Welcome to the Library!</h1>
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                     <form method="post" action="/">
                         <div class="form-group">
                             <label><strong>Enter Book</strong></label><br>
@@ -33,8 +33,40 @@
                             <input type="text" name="last_name" class="form-control" required>
                         </div>
 
-                        <button type="sumbit" class="btn">Add Book</button>
+                        <button type="sumbit" class="btn">Add Book</button><br><br>
                     </form>
+
+                    <form action='/' method='post'>
+                        <input name="_method" type="hidden" value="delete">
+                        <button type="submit" class="btn">Delete All</button>
+                    </form>
+                </div>
+
+                <div class="col-sm-4">
+                    <label><strong>Books Database</strong></label>
+
+                    {% if books is not empty %}
+                        {% for book in books %}
+                            <ul>
+                                <li>Title: {{ book.getTitle }}</li>
+                                    <ul>
+                                        <li>Genre: {{ book.getGenre }}</li>
+                                    </ul>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="col-sm-4">
+                    <label><strong>Authors Database</strong></label>
+
+                    {% if authors is not empty %}
+                        {% for author in authors %}
+                            <ul>
+                                <li>Name: {{ author.getFirstName }} {{ author.getLastName }}</li>
+                            </ul>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>
