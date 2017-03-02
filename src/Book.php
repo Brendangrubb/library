@@ -98,6 +98,8 @@
             }
         }
 
+        // Books<->Authors
+
         function addAuthor($author)
         {
             $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$author->getId()}, {$this->getId()});");

@@ -202,25 +202,5 @@
             $this->assertEquals($new_title, $result1);
             $this->assertEquals($new_genre, $result2);
         }
-
-        function testAddAuthor()
-        {
-            // Arrange
-            $title = "A Clockword Orange";
-            $genre = "dystopian future";
-            $book = new Book($title, $genre);
-            $book->save();
-
-            $first_name = "Anthony";
-            $last_name = "Burgess";
-            $author = new Author($first_name, $last_name);
-            $author->save();
-
-            // Act
-            $book->addAuthor($author);
-
-            // Assert
-            $this->assertEquals($book->getAuthors(), [$author]);
-        }
     }
 ?>

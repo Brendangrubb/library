@@ -5,6 +5,7 @@
     */
 
     require_once 'src/Author.php';
+    require_once 'src/Book.php';
 
     $server = 'mysql:host=localhost:8889;dbname=library_test';
     $username = 'root';
@@ -196,6 +197,54 @@
             // Assert
             $this->assertEquals($new_first_name, $result1);
             $this->assertEquals($new_last_name, $result2);
+        }
+
+        function test_addBook()
+        {
+            // Arrange
+            $first_name = "Philip";
+            $last_name = "Dick";
+            $author = new Author($first_name, $last_name);
+            $author->save();
+
+            $title = "Do Androids Dream of Electric Sheep";
+            $genre = "dystopian future";
+            $book = new Book($title, $genre);
+            $book->save();
+            // Act
+            $author->addBook($book);
+            $result = $author->getBooks();
+
+            // Assert
+            $this->assertEquals([$book] , $result);
+
+        }
+
+        function test_getBooks()
+        {
+            // Arrange
+            $first_name = "Philip";
+            $last_name = "Dick";
+            $author = new Author($first_name, $last_name);
+            $author->save();
+
+            $title = "Do Androids Dream of Electric Sheep";
+            $genre = "dystopian future";
+            $book = new Book($title, $genre);
+            $book->save();
+
+            $title2 = "Valis";
+            $genre2 = "sci fi";
+            $book2 = new Book($title2, $genre2);
+            $book2->save();
+
+            // Act
+            $author->addBook($book);
+            $author->addBook($book2);
+            $result = $author->getBooks();
+
+            // Assert
+            $this->assertEquals([$book, $book2], $result);
         }
     }
 ?>
