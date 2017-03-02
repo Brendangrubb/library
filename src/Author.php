@@ -81,6 +81,7 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM authors;");
+            // $GLOBALS['DB']->exec("DELETE FROM authors_books");
         }
 
         static function find($id)
@@ -101,6 +102,7 @@
         function delete()
         {
             $GLOBALS['DB']->exec("DELETE FROM authors WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE author_id = {$this->getId()};");
         }
 
         // Authors<->Books

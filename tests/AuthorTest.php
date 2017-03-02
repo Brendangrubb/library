@@ -17,6 +17,7 @@
         function tearDown()
         {
             Author::deleteAll();
+            Book::deleteAll();
         }
 
         function test_getFirstName()

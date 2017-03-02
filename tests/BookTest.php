@@ -130,19 +130,26 @@
         function test_delete()
         {
             // Arrange
+            $first_name = "Shel";
+            $last_name = "Silverstein";
+            $author = new Author($first_name, $last_name);
+            $author->save();
+
             $title = "The Giving Tree";
             $genre = "childrens";
             $book = new Book($title, $genre);
             $book->save();
 
             $title2 = "The Taking Boy";
-            $genre2 = "adult";
+            $genre2 = "Tree Horror";
             $book2 = new Book($title2, $genre2);
             $book2->save();
 
             // Act
+            $book->addAuthor($author);
+            $book2->addAuthor($author);
             $book->delete();
-            $result = Book::getAll();
+            $result = $author->getBooks();
 
             // Assert
             $this->assertEquals([$book2], $result);
