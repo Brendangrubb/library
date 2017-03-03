@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/styles.css" rel="stylesheet" type="text/css">
+        <title>Edit Author</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="jumbotron">About </h1>
+            <h4></h4>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <form method="post" action="{{ author.getId }}">
+                        <input name="author_id" type="hidden" value="{{ author.getId }}">
+
+                        <div class="form-group">
+                            <label><strong>Enter Book</strong></label><br>
+
+                            <select id='category_id' name='category_id' type='text'>
+                                {% for book in books %}
+                                    <option value="{{ book.getId }}">{{ book.getTitle }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-8">
+                    {% for book in books %}
+                        <ul>
+                            <li>{{ book.getTitle }}</li>
+                            <ul>
+                                <li>{{ book.getGenre }}</li>
+                            </ul>
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="go_home">
+                        <form action="/" method="get">
+                            <button class="btn btn-xs" type="submit">Go Home</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

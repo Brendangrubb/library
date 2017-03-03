@@ -27,12 +27,16 @@
         return $app['twig']->render('index.html.twig', array('books' => $books, 'authors' => $authors));
     });
 
-    $app->post('/', function() use ($app) {
+    $app->post('/add_book', function() use ($app) {
         $new_book = new Book(filter_var($_POST['title'], FILTER_SANITIZE_MAGIC_QUOTES), filter_var($_POST['genre'], FILTER_SANITIZE_MAGIC_QUOTES));
         $new_book->save();
+
+        return $app->redirect('/');
+    });
+
+    $app->post('/add_author', function() use ($app) {
         $new_author = new Author($_POST['first_name'], $_POST['last_name']);
         $new_author->save();
-        $new_book->addAuthor($new_author);
 
         return $app->redirect('/');
     });
@@ -55,6 +59,21 @@
         Author::deleteAll();
 
         return $app->redirect('/');
+    });
+
+    $app->get('/edit/{id}', function($id) use ($app) {
+        $author = Author::find($id);
+        $books = Book::getAll();
+        $author_books = $author->getBooks();
+
+        return $app['twig']->render('edit_author.html.twig', array('author' => $author, 'books' => $books, 'author_books' => $author_books));
+    });
+
+    $app->post("/edit/{id}", function($id) use ($app) {
+        $author = Author::find($id);
+        $author->addBook($_POST['book_id']);
+
+        return $app->redirect("/edit/" . $id);
     });
 
     return $app;

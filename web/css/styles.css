@@ -1,6 +1,7 @@
 #delete_all
 , #delete_books
 , #delete_authors
+, #go_home
 , #add_book {
     text-align: center;
 }

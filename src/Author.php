@@ -107,9 +107,9 @@
 
         // Authors<->Books
 
-        function addBook($book)
+        function addBook($book_id)
         {
-            $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$this->getId()}, {$book->getId()});");
+            $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id) VALUES ({$this->getId()}, {$book_id});");
         }
 
         function getBooks()

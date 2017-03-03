@@ -23,7 +23,7 @@
 
             <div class="row">
                 <div class="col-sm-4">
-                    <form method="post" action="/">
+                    <form method="post" action="/add_book">
                         <div class="form-group">
                             <label><strong>Enter Book</strong></label><br>
 
@@ -34,7 +34,12 @@
                             <label for="genre">Genre:</label>
                             <input type="text" name="genre" class="form-control" required>
                         </div>
+                        <div id="add_book">
+                            <button type="sumbit" class="btn btn-xs">Add Book</button><br><br>
+                        </div>
+                    </form>
 
+                    <form method="post" action="/add_author">
                         <label><strong>Enter Author</strong></label><br>
 
                         <div class="form-group">
@@ -48,7 +53,7 @@
                         </div>
 
                         <div id="add_book">
-                            <button type="sumbit" class="btn btn-xs">Add Book</button><br><br>
+                            <button type="sumbit" class="btn btn-xs">Add Author</button><br><br>
                         </div>
                     </form>
                 </div>
@@ -81,7 +86,7 @@
                     {% if authors is not empty %}
                         {% for author in authors %}
                             <ul>
-                                <li>Name: {{ author.getFirstName }} {{ author.getLastName }}</li>
+                                <li>Name: <a href="/edit/{{ author.getId }}">{{ author.getFirstName }} {{ author.getLastName }}</a></li>
                             </ul>
                         {% endfor %}
 

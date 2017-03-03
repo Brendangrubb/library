@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/styles.css" rel="stylesheet" type="text/css">
+        <title>Edit Author</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="jumbotron">About {{ author.getFirstName }} {{ author.getLastName }}</h1>
+            <h4>{{ author.getFirstName }} {{ author.getLastName }} has written the following books:</h4>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <form method="post" action="/edit/{{ author.getId }}">
+                        <input name="author_id" type="hidden" value="{{ author.getId }}">
+
+                        <div class="form-group">
+                            <label><strong>Enter Book</strong></label><br>
+
+                            <select name='book_id'>
+                                {% for book in books %}
+                                    <option value="{{ book.getId }}">{{ book.getTitle }}</option>
+                                {% endfor %}
+                            </select><br><br>
+
+                            <button type="submit" class="btn btn-xs">Add Book</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-8">
+                    {% for author_book in author_books %}
+                        <ul>
+                            <li>{{ author_book.getTitle }}</li>
+                            <ul>
+                                <li>{{ author_book.getGenre }}</li>
+                            </ul>
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="go_home">
+                        <form action="/" method="get">
+                            <button class="btn btn-xs" type="submit">Go Home</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
